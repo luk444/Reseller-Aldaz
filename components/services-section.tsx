@@ -46,10 +46,40 @@ export function ServicesSection({
             <p className="mt-2 max-w-xl text-sm text-slate-400 sm:text-base">
               Precios mostrados en{" "}
               <span className="font-medium text-cyan-200/90">{currency}</span>{" "}
-              <span className="text-slate-500">({currencyHint})</span>. Tasas
-              vía <span className="text-slate-300">/api/exchange-rates</span>{" "}
-              (servidor: open.er / frankfurter + DolarAPI regional); caché local
-              y sondeo cada ~10 min.
+              <span className="text-slate-500">({currencyHint})</span>.
+              {currency === "ARS" ? (
+                <>
+                  {" "}
+                  En ARS el servidor usa la cotización{" "}
+                  <strong className="font-medium text-slate-300">venta</strong>{" "}
+                  del dólar blue desde{" "}
+                  <a
+                    href="https://dolarapi.com/v1/dolares/blue"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-cyan-400/90 underline decoration-cyan-400/40 underline-offset-2 hover:text-cyan-300"
+                  >
+                    dolarapi.com/v1/dolares/blue
+                  </a>{" "}
+                  (mismo criterio que el JSON público: campo{" "}
+                  <code className="rounded bg-white/10 px-1 py-0.5 text-[0.8em] text-cyan-200/90">
+                    venta
+                  </code>
+                  ).
+                </>
+              ) : currency === "BRL" || currency === "CLP" || currency === "UYU" ? (
+                <>
+                  {" "}
+                  Esta moneda se calcula con la cotización regional de{" "}
+                  <strong className="font-medium text-slate-300">DolarAPI</strong>{" "}
+                  (URL por país en el servidor; se prioriza el precio de venta o
+                  equivalente del endpoint).
+                </>
+              ) : null}{" "}
+              Tasas vía{" "}
+              <span className="text-slate-300">/api/exchange-rates</span>{" "}
+              (open.er / frankfurter + overrides regionales); caché local y sondeo
+              cada ~10 min.
             </p>
           </div>
           <div className="flex flex-col items-start gap-2 sm:items-end">

@@ -89,10 +89,26 @@ export const CURRENCY_SELECTOR_OPTIONS: {
   hint: string;
 }[] = [
   { code: "USD", label: "USD", hint: "Dólar estadounidense" },
-  { code: "ARS", label: "ARS", hint: "Peso argentino" },
-  { code: "UYU", label: "UYU", hint: "Peso uruguayo" },
-  { code: "CLP", label: "CLP", hint: "Peso chileno" },
-  { code: "BRL", label: "BRL", hint: "Real brasileño" },
+  {
+    code: "ARS",
+    label: "ARS",
+    hint: "Peso argentino (dólar blue venta, DolarAPI)",
+  },
+  {
+    code: "UYU",
+    label: "UYU",
+    hint: "Peso uruguayo (DolarAPI UY, venta)",
+  },
+  {
+    code: "CLP",
+    label: "CLP",
+    hint: "Peso chileno (DolarAPI CL, venta)",
+  },
+  {
+    code: "BRL",
+    label: "BRL",
+    hint: "Real (DolarAPI BR, venta)",
+  },
 ];
 
 export function hasRateForSelection(

@@ -15,6 +15,10 @@ const REFRESH_MS = (() => {
 const ER_HOST_KEY = process.env.EXCHANGERATE_HOST_ACCESS_KEY;
 
 const DOLARAPI_REGIONAL: Record<string, string> = {
+  /**
+   * ARS: dólar blue — se usa el campo JSON `venta` (ARS por 1 USD), no `compra`.
+   * @see https://dolarapi.com/v1/dolares/blue
+   */
   ARS:
     process.env.DOLAR_BLUE_API_URL ?? "https://dolarapi.com/v1/dolares/blue",
   BRL:
