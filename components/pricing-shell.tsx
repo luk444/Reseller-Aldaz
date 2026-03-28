@@ -1,5 +1,6 @@
 "use client";
 
+import { DownloadsSection } from "@/components/downloads-section";
 import { PaymentMethods } from "@/components/payment-methods";
 import { ServicesSection } from "@/components/services-section";
 import { SiteFooter } from "@/components/site-footer";
@@ -23,6 +24,7 @@ export function PricingShell() {
         refresh={refresh}
       />
       <PaymentMethods />
+      <DownloadsSection />
       <SiteFooter
         ratesUpdatedLabel={formatDisplayDate(lastUpdated, "sincronizando…")}
       />
