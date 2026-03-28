@@ -22,6 +22,15 @@ npm run build
 npm start
 ```
 
+### Netlify
+
+El repo incluye `netlify.toml` y `@netlify/plugin-nextjs` (necesario para Next.js 14 con App Router y `/api/*`). En el panel de Netlify, en **Build settings**:
+
+- **Build command:** `npm run build` (o déjalo vacío si usa el archivo del repo).
+- **Publish directory:** déjalo **vacío** o en **Clear** — no uses `out` ni `.next` a mano; el plugin gestiona el despliegue.
+
+Si antes tenías `Publish directory` en `out` o `.next`, bórralo y vuelve a desplegar.
+
 ## Variables de entorno
 
 Copia `.env.example` a `.env.local` y ajusta:
