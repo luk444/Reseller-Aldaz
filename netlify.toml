@@ -3,8 +3,10 @@
 
 [build]
   command = "npm run build"
-
-# No establecer "publish" manualmente: el plugin inyecta el runtime correcto.
+  # Debe ser un subdirectorio distinto de la raíz: si en el panel de Netlify
+  # tienes "Publish directory" = / o vacío interpretado como repo, el plugin falla
+  # con "publish directory cannot be the same as the base directory".
+  publish = ".next"
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"

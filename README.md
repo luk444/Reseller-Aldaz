@@ -27,9 +27,9 @@ npm start
 El repo incluye `netlify.toml` y `@netlify/plugin-nextjs` (necesario para Next.js 14 con App Router y `/api/*`). En el panel de Netlify, en **Build settings**:
 
 - **Build command:** `npm run build` (o déjalo vacío si usa el archivo del repo).
-- **Publish directory:** déjalo **vacío** o en **Clear** — no uses `out` ni `.next` a mano; el plugin gestiona el despliegue.
+- **Publish directory:** lo define `netlify.toml` como **`.next`** (obligatorio para evitar el error *“publish directory cannot be the same as the base directory”* si en la UI tenías la raíz del repo). En el panel puedes **borrar** el valor de “Publish directory” para que mande el archivo del repo, o dejarlo en **`.next`** (debe coincidir).
 
-Si antes tenías `Publish directory` en `out` o `.next`, bórralo y vuelve a desplegar.
+No uses solo la raíz `/` ni el repo completo como publish en la UI.
 
 ## Variables de entorno
 
