@@ -1,11 +1,14 @@
+"use client";
+
 import { siteConfig } from "@/lib/config";
+import { useLanguage } from "@/context/language-context";
 
 type SiteFooterProps = {
-  /** Texto ya formateado de última actualización de tasas */
   ratesUpdatedLabel: string;
 };
 
 export function SiteFooter({ ratesUpdatedLabel }: SiteFooterProps) {
+  const { t } = useLanguage();
   const year = new Date().getFullYear();
   return (
     <footer
@@ -17,7 +20,8 @@ export function SiteFooter({ ratesUpdatedLabel }: SiteFooterProps) {
           © {year} Aldaz Activator Tool — {siteConfig.name}
         </p>
         <p className="text-slate-400">
-          Tasas: <span className="text-slate-300">{ratesUpdatedLabel}</span>
+          {t("footer.rates")}{" "}
+          <span className="text-slate-300">{ratesUpdatedLabel}</span>
         </p>
       </div>
     </footer>

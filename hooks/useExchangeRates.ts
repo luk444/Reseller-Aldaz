@@ -110,10 +110,13 @@ async function fetchExchangeRatesApi(): Promise<{
   }
 }
 
+/** Claves para `t(\`errors.${key}\`)` en la UI. */
+export type ExchangeErrorKey = "ratesStale" | "ratesApiFailed";
+
 export type UseExchangeRatesResult = {
   rates: ExchangeRatesMap;
   loading: boolean;
-  error: string | null;
+  error: ExchangeErrorKey | null;
   lastUpdated: Date | null;
   usedFallback: boolean;
   refresh: () => Promise<void>;
@@ -122,7 +125,7 @@ export type UseExchangeRatesResult = {
 export function useExchangeRates(): UseExchangeRatesResult {
   const [rates, setRates] = useState<ExchangeRatesMap>({ USD: 1 });
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<ExchangeErrorKey | null>(null);
   const [lastUpdated, setLastUpdated] = useState<Date | null>(null);
   const [usedFallback, setUsedFallback] = useState(false);
   const mounted = useRef(true);
@@ -177,23 +180,18 @@ export function useExchangeRates(): UseExchangeRatesResult {
           } else {
             setError(null);
             if (live.stale) {
-              setError(
-                "Las tasas del servidor pueden estar desactualizadas (último refresco falló)."
-              );
+              setError("ratesStale");
             }
           }
         } else if (silent) {
           /* conservar tasas en pantalla */
         } else {
           applyStaticFallback();
-          setError(
-            "No se pudo obtener /api/exchange-rates. Mostrando valores aproximados."
-          );
+          setError("ratesApiFailed");
         }
-      } catch (e) {
+      } catch {
         if (!silent) {
-          const msg = e instanceof Error ? e.message : "Error desconocido";
-          setError(msg);
+          setError("ratesApiFailed");
           applyStaticFallback();
         }
       } finally {

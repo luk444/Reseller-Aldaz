@@ -5,6 +5,7 @@ import { PaymentMethods } from "@/components/payment-methods";
 import { ServicesSection } from "@/components/services-section";
 import { SiteFooter } from "@/components/site-footer";
 import { TelegramFab } from "@/components/telegram-fab";
+import { useLanguage } from "@/context/language-context";
 import { useExchangeRates } from "@/hooks/useExchangeRates";
 import { formatDisplayDate } from "@/utils/format";
 
@@ -13,6 +14,13 @@ import { formatDisplayDate } from "@/utils/format";
  */
 export function PricingShell() {
   const { rates, loading, error, lastUpdated, refresh } = useExchangeRates();
+  const { locale, t } = useLanguage();
+
+  const ratesUpdatedLabel = formatDisplayDate(
+    lastUpdated,
+    t("common.syncing"),
+    locale
+  );
 
   return (
     <>
@@ -25,9 +33,7 @@ export function PricingShell() {
       />
       <PaymentMethods />
       <DownloadsSection />
-      <SiteFooter
-        ratesUpdatedLabel={formatDisplayDate(lastUpdated, "sincronizando…")}
-      />
+      <SiteFooter ratesUpdatedLabel={ratesUpdatedLabel} />
       <TelegramFab />
     </>
   );

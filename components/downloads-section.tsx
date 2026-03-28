@@ -4,13 +4,16 @@ import { useCallback, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Check, Copy, Download, ExternalLink, HardDrive } from "lucide-react";
 import { downloadItems } from "@/data/downloads";
-
-function formatDownloads(n: number): string {
-  return n.toLocaleString("es");
-}
+import { useLanguage } from "@/context/language-context";
 
 export function DownloadsSection() {
   const [copiedId, setCopiedId] = useState<string | null>(null);
+  const { locale, t } = useLanguage();
+
+  const formatDownloads = useCallback(
+    (n: number) => n.toLocaleString(locale === "es" ? "es" : "en-US"),
+    [locale]
+  );
 
   const copyLink = useCallback(async (id: string, url: string) => {
     try {
@@ -24,7 +27,8 @@ export function DownloadsSection() {
 
   return (
     <section
-      className="px-4 py-16"
+      id="descargas"
+      className="scroll-mt-24 px-4 py-16"
       aria-labelledby="downloads-heading"
     >
       <div className="mx-auto max-w-6xl">
@@ -32,12 +36,10 @@ export function DownloadsSection() {
           id="downloads-heading"
           className="text-center text-2xl font-bold text-white sm:text-3xl"
         >
-          Descargas — copiar enlace
+          {t("downloads.title")}
         </h2>
         <p className="mx-auto mt-3 max-w-2xl text-center text-sm text-slate-400 sm:text-base">
-          Nombres y datos alineados con tu carpeta de Mediafire (tamaño, descargas
-          y fecha de subida como referencia). Copia el enlace o ábrelo en una
-          pestaña nueva.
+          {t("downloads.intro")}
         </p>
 
         <ul className="mt-10 space-y-3">
@@ -46,6 +48,8 @@ export function DownloadsSection() {
             return (
               <motion.li
                 key={item.id}
+                id={`dl-${item.id}`}
+                className="scroll-mt-28"
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-20px" }}
@@ -69,12 +73,13 @@ export function DownloadsSection() {
                         ) : null}
                         {item.downloads != null ? (
                           <span>
-                            {formatDownloads(item.downloads)} descargas
+                            {formatDownloads(item.downloads)}{" "}
+                            {t("downloads.downloads")}
                           </span>
                         ) : null}
                         {item.uploadedAt ? (
                           <span className="text-slate-600">
-                            Subido: {item.uploadedAt}
+                            {t("downloads.uploaded")} {item.uploadedAt}
                           </span>
                         ) : null}
                       </p>
@@ -89,16 +94,16 @@ export function DownloadsSection() {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-2 rounded-xl border border-white/15 bg-white/5 px-4 py-2.5 text-sm font-medium text-slate-200 transition hover:border-cyan-400/30 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-400"
-                      aria-label={`Abrir descarga en Mediafire: ${item.label}`}
+                      aria-label={`${t("downloads.openAria")} ${item.label}`}
                     >
                       <ExternalLink className="h-4 w-4" aria-hidden />
-                      Abrir
+                      {t("downloads.open")}
                     </a>
                     <button
                       type="button"
                       onClick={() => void copyLink(item.id, item.url)}
                       className="inline-flex min-w-[8.5rem] items-center justify-center gap-2 rounded-xl bg-gradient-accent px-4 py-2.5 text-sm font-semibold text-slate-950 shadow-glow-sm transition hover:opacity-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-300"
-                      aria-label={`Copiar enlace de ${item.label}`}
+                      aria-label={`${t("downloads.copyAria")} ${item.label}`}
                     >
                       <AnimatePresence mode="wait" initial={false}>
                         {copied ? (
@@ -110,7 +115,7 @@ export function DownloadsSection() {
                             className="flex items-center gap-2"
                           >
                             <Check className="h-4 w-4" aria-hidden />
-                            ¡Copiado!
+                            {t("downloads.copied")}
                           </motion.span>
                         ) : (
                           <motion.span
@@ -121,7 +126,7 @@ export function DownloadsSection() {
                             className="flex items-center gap-2"
                           >
                             <Copy className="h-4 w-4" aria-hidden />
-                            Copiar link
+                            {t("downloads.copy")}
                           </motion.span>
                         )}
                       </AnimatePresence>
@@ -135,8 +140,7 @@ export function DownloadsSection() {
 
         <p className="mt-8 flex items-center justify-center gap-2 text-center text-xs text-slate-500">
           <Download className="h-4 w-4 shrink-0 text-cyan-500/70" aria-hidden />
-          Los archivos están alojados en Mediafire; verifica siempre el enlace
-          antes de enviarlo.
+          {t("downloads.footnote")}
         </p>
       </div>
     </section>

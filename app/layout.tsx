@@ -15,11 +15,11 @@ const baseUrl =
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
-    default: `${siteConfig.name} | Precios y servicios`,
+    default: `${siteConfig.name} | Pricing & services`,
     template: `%s | ${siteConfig.name}`,
   },
   description:
-    "Precios profesionales para bypass, activación y servicios digitales iPhone/iPad. Tasas de cambio actualizadas automáticamente en USD, ARS, UYU, CLP y BRL.",
+    "Professional pricing for bypass, activation, and iPhone/iPad digital services. Live exchange rates for USD, ARS, UYU, CLP, and BRL.",
   keywords: [
     "Aldaz",
     "Activator",
@@ -28,25 +28,25 @@ export const metadata: Metadata = {
     "iPad",
     "MDM",
     "FMI",
-    "precios",
-    "servicios digitales",
+    "pricing",
+    "digital services",
   ],
   authors: [{ name: "Aldaz Activator Tool" }],
   creator: "Aldaz Activator Tool",
   openGraph: {
     type: "website",
-    locale: "es_ES",
+    locale: "en_US",
     url: baseUrl,
     siteName: siteConfig.name,
-    title: `${siteConfig.name} — Lista de precios`,
+    title: `${siteConfig.name} — Price list`,
     description:
-      "Servicios digitales premium: bypass, activación y más. Conversión automática a múltiples monedas.",
+      "Premium digital services: bypass, activation, and more. Automatic conversion to multiple currencies.",
   },
   twitter: {
     card: "summary_large_image",
-    title: `${siteConfig.name} — Lista de precios`,
+    title: `${siteConfig.name} — Price list`,
     description:
-      "Servicios digitales premium con precios en tiempo real en varias monedas.",
+      "Premium digital services with live multi-currency pricing.",
   },
   robots: {
     index: true,
@@ -66,14 +66,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" className={inter.variable}>
+    <html lang="en" className={inter.variable}>
       <body className={`${inter.className} min-h-screen bg-surface`}>
-        <a
-          href="#contenido-principal"
-          className="absolute left-[-10000px] top-4 z-[100] rounded-lg bg-cyan-500 px-4 py-2 text-slate-950 transition focus:left-4 focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-cyan-300"
-        >
-          Saltar al contenido
-        </a>
         {children}
       </body>
     </html>

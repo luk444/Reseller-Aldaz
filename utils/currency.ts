@@ -82,33 +82,16 @@ export const DISPLAY_CURRENCIES: SupportedCurrency[] = [
   "BRL",
 ];
 
-/** Opciones del selector superior (etiqueta corta + accesible). */
+/** Opciones del selector superior (etiqueta ISO; hints vía i18n `currency.hint.*`). */
 export const CURRENCY_SELECTOR_OPTIONS: {
   code: SupportedCurrency;
   label: string;
-  hint: string;
 }[] = [
-  { code: "USD", label: "USD", hint: "Dólar estadounidense" },
-  {
-    code: "ARS",
-    label: "ARS",
-    hint: "Peso argentino (dólar blue venta, DolarAPI)",
-  },
-  {
-    code: "UYU",
-    label: "UYU",
-    hint: "Peso uruguayo (DolarAPI UY, venta)",
-  },
-  {
-    code: "CLP",
-    label: "CLP",
-    hint: "Peso chileno (DolarAPI CL, venta)",
-  },
-  {
-    code: "BRL",
-    label: "BRL",
-    hint: "Real (DolarAPI BR, venta)",
-  },
+  { code: "USD", label: "USD" },
+  { code: "ARS", label: "ARS" },
+  { code: "UYU", label: "UYU" },
+  { code: "CLP", label: "CLP" },
+  { code: "BRL", label: "BRL" },
 ];
 
 export function hasRateForSelection(

@@ -3,8 +3,10 @@
 import { motion } from "framer-motion";
 import { MessageCircle, Sparkles } from "lucide-react";
 import { siteConfig } from "@/lib/config";
+import { useLanguage } from "@/context/language-context";
 
 export function HeroSection() {
+  const { t } = useLanguage();
   return (
     <header
       className="relative overflow-hidden px-4 pb-16 pt-20 sm:pb-20 sm:pt-28"
@@ -22,7 +24,7 @@ export function HeroSection() {
           className="mb-6 inline-flex items-center gap-2 rounded-full border border-cyan-400/20 bg-white/5 px-4 py-1.5 text-sm text-cyan-200/90 backdrop-blur-md"
         >
           <Sparkles className="h-4 w-4 text-cyan-400" aria-hidden />
-          <span>Servicios digitales profesionales</span>
+          <span>{t("hero.badge")}</span>
         </motion.div>
         <motion.h1
           id="hero-title"
@@ -39,9 +41,7 @@ export function HeroSection() {
           transition={{ duration: 0.55, delay: 0.12 }}
           className="mx-auto mt-6 max-w-2xl text-base text-slate-400 sm:text-lg"
         >
-          Lista de precios clara y conversión automática a tu moneda. Diseñado
-          para equipos que trabajan con herramientas premium y clientes en toda
-          Latinoamérica.
+          {t("hero.subtitle")}
         </motion.p>
         <motion.div
           initial={{ opacity: 0, y: 16 }}
@@ -54,13 +54,13 @@ export function HeroSection() {
             target="_blank"
             rel="noopener noreferrer"
             className="group inline-flex items-center gap-2 rounded-xl bg-gradient-accent px-8 py-3.5 text-base font-semibold text-slate-950 shadow-glow transition hover:opacity-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-300"
-            aria-label="Contactar por Telegram (se abre en una pestaña nueva)"
+            aria-label={t("hero.ctaAria")}
           >
             <MessageCircle
               className="h-5 w-5 transition group-hover:scale-110"
               aria-hidden
             />
-            Contactar por Telegram
+            {t("hero.cta")}
           </a>
         </motion.div>
       </div>
